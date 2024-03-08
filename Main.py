@@ -15,8 +15,10 @@ image = pyglet.image.SolidColorImagePattern((255,255,255,255)).create_image(int(
 window.push_handlers(MOUSE)
 
 #All button declarations
-buttonimage = pyglet.image.load('C:\\Users\\aiden\\Grandpa Project\\button.jpg')
+buttonimage = pyglet.image.load('sensor_button.jpg')
 
+#All labels for buttons here
+label = pyglet.text.Label(text="sensor data here", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
 
 #returns window
 def getWindow():
@@ -40,9 +42,10 @@ def on_draw():
     window.clear()
     image.blit(0,0)
     buttonimage.blit(300,300)
+    label.draw()
 def update(dt):
     global processedonce
-    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],300,300,1,1,255,148):
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],300,300,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
             print("Works")
             processedonce = True
