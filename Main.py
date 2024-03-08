@@ -15,8 +15,9 @@ image = pyglet.image.SolidColorImagePattern((255,255,255,255)).create_image(int(
 window.push_handlers(MOUSE)
 
 #All button declarations
-buttonimage = pyglet.image.load('sensor_button.jpg')
-
+GT = pyglet.image.load('sensor_button.jpg')
+WB = pyglet.image.load('sensor_button.jpg')
+AT, IR, Wd, WS = pyglet.image.load('sensor_button.jpg'), pyglet.image.load('sensor_button.jpg'), pyglet.image.load('sensor_button.jpg'), pyglet.image.load('sensor_button.jpg')
 #All labels for buttons here
 label = pyglet.text.Label(text="sensor data here", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
 
@@ -41,7 +42,12 @@ processedonce = False
 def on_draw():
     window.clear()
     image.blit(0,0)
-    buttonimage.blit(300,300)
+    GT.blit(300,300)
+    WB.blit(300,300)
+    AT.blit(300,300)
+    IR.blit(300,300)
+    Wd.blit(300,300)
+    WS.blit(300,300)
     label.draw()
 def update(dt):
     global processedonce
