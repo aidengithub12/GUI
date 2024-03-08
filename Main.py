@@ -12,12 +12,12 @@ MOUSE = MouseHandler.MouseStateHandler()
 resolution = [1920,1080]
 window = pyglet.window.Window(width=int(resolution[0]),height=int(resolution[1]))
 image = pyglet.image.SolidColorImagePattern((255,255,255,255)).create_image(int(resolution[0]),int(resolution[1]))
-buttonimage = pyglet.image.load('C:\\Users\\aiden\\Grandpa Project\\button.jpg')
 window.push_handlers(MOUSE)
-def printTest():
-    print("Cccccccccccc")
-def notPressed():
-    return "nothing here"
+
+#All button declarations
+buttonimage = pyglet.image.load('C:\\Users\\aiden\\Grandpa Project\\button.jpg')
+
+
 #returns window
 def getWindow():
     return window
@@ -34,14 +34,20 @@ def initializeWindow():
     # setButtons()
     pass
 #sets window everytime something is added
+processedonce = False
 @window.event
 def on_draw():
     window.clear()
     image.blit(0,0)
     buttonimage.blit(300,300)
 def update(dt):
+    global processedonce
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],300,300,1,1,255,148):
-        print("hi")
+        if MOUSE[mouse.LEFT] and processedonce == False:
+            print("Works")
+            processedonce = True
+        if not MOUSE[mouse.LEFT] and processedonce == True:
+            processedonce = False
 #opens graph window
 def getGraph(x=[1,2,3],y=[2,4,1]):
     plot.plot(x,y)
@@ -53,17 +59,12 @@ def getGraph(x=[1,2,3],y=[2,4,1]):
 @window.event
 def on_key_press(symbol = pyglet.window.key.C, modifiers = 0):
     getGraph()
-
-    # label =  pyglet.text.Label(text=str(getc()),color=(255,255,255,255),height=100,width=100,x=50,y=50,)
-    # label.draw()
-    # print(getc())
-    # increaseTotalClicks(getc())
 #makes click sound everytime a window is opened
 @window.event
 def on_activate():
     # music = pyglet.media.load("C:\\Users\\aiden\\Downloads\\click.mp3")
     # music.play()
-    initializeWindow()
+    pass
 
 #runs code above
 pyglet.clock.schedule_interval(update,1/120)
