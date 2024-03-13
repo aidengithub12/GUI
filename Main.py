@@ -32,10 +32,7 @@ def setBackground():
         pixel = bytes([random.randint(0,255)]) + bytes([random.randint(0,255)]) + bytes([random.randint(0,255)])
         new_image += pixel 
     image.set_data('RGB', window.width * 3, new_image)
-#collection of functions to set window up
-def initializeWindow():
-    # setButtons()
-    pass
+
 #sets window everytime something is added
 processedonce = False
 @window.event
