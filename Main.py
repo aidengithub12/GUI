@@ -19,12 +19,13 @@ GT = pyglet.image.load('sensor_button.jpg')
 WB = pyglet.image.load('sensor_button.jpg')
 AT, IR, Wd, WS = pyglet.image.load('sensor_button.jpg'), pyglet.image.load('sensor_button.jpg'), pyglet.image.load('sensor_button.jpg'), pyglet.image.load('sensor_button.jpg')
 #All labels for buttons here
-label = pyglet.text.Label(text="GT", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
-label = pyglet.text.Label(text="WB", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
-label = pyglet.text.Label(text="AT", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
-label = pyglet.text.Label(text="IR", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
-label = pyglet.text.Label(text="Wd", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
-label = pyglet.text.Label(text="WS", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
+labelGT = pyglet.text.Label(text="GT", color=(0,0,0,0),x=128,y=1035,font_size=36,bold=True,font_name='Times New Roman',anchor_x='center',anchor_y='center').draw()
+labelWB = pyglet.text.Label(text="WB", color=(0,0,0,0),x=351,y=1035,font_size=36,bold=True).draw()
+labelAT = pyglet.text.Label(text="AT", color=(0,0,0,0),x=841,y=1035,font_size=36,bold=True).draw()
+labelIR = pyglet.text.Label(text="IR", color=(0,0,0,0),x=1311,y=1035,font_size=36,bold=True).draw()
+labelWD = pyglet.text.Label(text="Wd", color=(0,0,0,0),x=550,y=1035,font_size=36,bold=True).draw()
+labelWS = pyglet.text.Label(text="WS", color=(0,0,0,0),x=1500,y=1035,font_size=36,bold=True).draw()
+
 
 #returns window
 def getWindow():
@@ -44,16 +45,47 @@ processedonce = False
 def on_draw():
     window.clear()
     image.blit(0,0)
-    GT.blit(300,300)
-    WB.blit(300,300)
-    AT.blit(300,300)
-    IR.blit(300,300)
-    Wd.blit(300,300)
-    WS.blit(300,300)
-    label.batch.draw()
+    GT.blit(123,733)
+    WB.blit(351,733)
+    AT.blit(841,733)
+    IR.blit(1000,733)
+    Wd.blit(550,733)
+    WS.blit(1200,733)
+    
 def update(dt):
     global processedonce
-    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],300,300,1,1,255,136):
+    #button logic for GT
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],123,733,1,1,255,136):
+        if MOUSE[mouse.LEFT] and processedonce == False:
+            print("Works")
+            processedonce = True
+        if not MOUSE[mouse.LEFT] and processedonce == True:
+            processedonce = False
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],351,733,1,1,255,136):
+        if MOUSE[mouse.LEFT] and processedonce == False:
+            print("Works")
+            processedonce = True
+        if not MOUSE[mouse.LEFT] and processedonce == True:
+            processedonce = False
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],841,733,1,1,255,136):
+        if MOUSE[mouse.LEFT] and processedonce == False:
+            print("Works")
+            processedonce = True
+        if not MOUSE[mouse.LEFT] and processedonce == True:
+            processedonce = False
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],1000,733,1,1,255,136):
+        if MOUSE[mouse.LEFT] and processedonce == False:
+            print("Works")
+            processedonce = True
+        if not MOUSE[mouse.LEFT] and processedonce == True:
+            processedonce = False
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],550,733,1,1,255,136):
+        if MOUSE[mouse.LEFT] and processedonce == False:
+            print("Works")
+            processedonce = True
+        if not MOUSE[mouse.LEFT] and processedonce == True:
+            processedonce = False
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],1200,733,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
             print("Works")
             processedonce = True
