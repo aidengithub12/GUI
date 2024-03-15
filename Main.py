@@ -19,7 +19,12 @@ GT = pyglet.image.load('sensor_button.jpg')
 WB = pyglet.image.load('sensor_button.jpg')
 AT, IR, Wd, WS = pyglet.image.load('sensor_button.jpg'), pyglet.image.load('sensor_button.jpg'), pyglet.image.load('sensor_button.jpg'), pyglet.image.load('sensor_button.jpg')
 #All labels for buttons here
-label = pyglet.text.Label(text="sensor data here", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
+label = pyglet.text.Label(text="GT", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
+label = pyglet.text.Label(text="WB", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
+label = pyglet.text.Label(text="AT", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
+label = pyglet.text.Label(text="IR", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
+label = pyglet.text.Label(text="Wd", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
+label = pyglet.text.Label(text="WS", color=(0,0,0,0),x=300,y=1000,font_size=36,bold=True)
 
 #returns window
 def getWindow():
@@ -45,7 +50,7 @@ def on_draw():
     IR.blit(300,300)
     Wd.blit(300,300)
     WS.blit(300,300)
-    label.draw()
+    label.batch.draw()
 def update(dt):
     global processedonce
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],300,300,1,1,255,136):
