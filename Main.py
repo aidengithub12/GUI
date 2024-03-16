@@ -1,20 +1,21 @@
 import pyglet as pg
-import os
 from pyglet.window import mouse
 import RectangleCollision
 import MouseHandler
 import pyglet.gui as pgg
 import pandas as pand
 import random
+import csv
 # import glooey as golden
 import matplotlib.pyplot as plot
+import Calculate
 #TODO: fix screen bug
 MOUSE = MouseHandler.MouseStateHandler()
 resolution = [1920,1080]
-window = pg.window.Window(width=int(resolution[0]),height=int(resolution[1]),resizable = True)
+window = pg.window.Window(width=int(resolution[0]),height=int(resolution[1]),resizable = True,)
 image = pg.image.SolidColorImagePattern((255,255,255,255)).create_image(int(resolution[0]),int(resolution[1]))
 window.push_handlers(MOUSE)
-samplestring = '80,90,104,120,28.2,70,10,270,90'
+
 
 #All reading variables
 GT = 0 #temp
@@ -53,14 +54,16 @@ labelIR = pg.text.Label(text="IR", color=(0,0,0,255),x=1000,y=1035,font_size=36,
 labelWD = pg.text.Label(text="Wd", color=(0,0,0,255),x=550,y=1035,font_size=36,bold=True)
 labelWS = pg.text.Label(text="WS", color=(0,0,0,255),x=1200,y=1035,font_size=36,bold=True)
 blank = pg.text.Label('')
-labelReadingGT = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 123, y = 833, font_size=36, bold = True)
-labelReadingWB = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 351, y = 833, font_size=36, bold = True)
-labelReadingAT = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 791, y = 833, font_size=36, bold = True)
-labelReadingIR = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 1000, y = 833, font_size=36, bold = True)
-labelReadingWD = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 550, y = 833, font_size=36, bold = True)
-labelReadingWS = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 1200, y = 833, font_size=36, bold = True)
-labelReadingLAT = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 123, y = 150, font_size=36, bold = True)
-labelReadingLONG = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 123, y = 150, font_size=36, bold = True)
+labelReadingGT = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 123, y = 893, font_size=36, bold = True)
+labelReadingWB = pg.text.Label(text=str(WB) + ' C', color = (0,0,0,255), x = 351, y = 893, font_size=36, bold = True)
+labelReadingAT = pg.text.Label(text=str(AT) + ' C', color = (0,0,0,255), x = 791, y = 893, font_size=36, bold = True)
+labelReadingIR = pg.text.Label(text=str(IR) + ' C', color = (0,0,0,255), x = 1000, y = 893, font_size=36, bold = True)
+labelReadingWD = pg.text.Label(text=str(WD) + ' degrees', color = (0,0,0,255), x = 550, y = 893, font_size=36, bold = True)
+labelReadingWS = pg.text.Label(text=str(WS) + ' m/s', color = (0,0,0,255), x = 1200, y = 893, font_size=36, bold = True)
+labelReadingLAT = pg.text.Label(text=str(LAT) + ' degrees', color = (0,0,0,255), x = 99, y = 465, font_size=36, bold = True)
+labelReadingLONG = pg.text.Label(text=str(LONG) + ' degrees', color = (0,0,0,255), x = 99, y = 323, font_size=36, bold = True)
+labelReadingBAR = pg.text.Label(text = str(BAR) + ' units', color = (0,0,0,255), x = 1100, y = 465, font_size=36, bold = True)
+labelReadingRH = pg.text.Label(text = str(RH) + ' units', color = (0,0,0,255), x = 1100, y = 323, font_size=36, bold = True)
 #returns window
 def getWindow():
     return window
@@ -91,9 +94,22 @@ def on_draw():
     IR_Image.blit(937,833)
     Wd_Image.blit(487,833)
     WS_Image.blit(1137,833)
-    
-def update(dt):
+    labelReadingGT.draw()
+    labelReadingAT.draw()
+    labelReadingIR.draw()
+    labelReadingWB.draw()
+    labelReadingWS.draw()
+    labelReadingWD.draw()
+    labelReadingLAT.draw()
+    labelReadingLONG.draw()
+    labelReadingBAR.draw()
+    labelReadingRH.draw()
+def update(dt,GT=GT,label = labelAT):
     global processedonce
+    #label data updates
+    label.delete()
+    label = pg.text.Label(text=str(GT + 1) + ' C',color=(0,0,0,255),font_size=36, bold=True, x = 123, y=893).draw()
+    GT += 1
     #button logic for GT
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],60,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
@@ -157,7 +173,7 @@ def on_hide():
 @window.event
 def on_show():
     on_draw()
-
+Calculate.getSensorData()
 #runs code above
 pg.clock.schedule_interval(update,1/120)
 pg.app.run()
