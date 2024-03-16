@@ -1,4 +1,3 @@
-
 import pyglet as pg
 from pyglet.window import mouse
 import RectangleCollision
