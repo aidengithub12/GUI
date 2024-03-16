@@ -2,6 +2,7 @@ import pyglet as pg
 from pyglet.window import mouse
 import RectangleCollision
 import MouseHandler
+import time
 import pyglet.gui as pgg
 import pandas as pand
 import random
@@ -104,11 +105,13 @@ def on_draw():
     labelReadingLONG.draw()
     labelReadingBAR.draw()
     labelReadingRH.draw()
-def update(dt,GT=GT,label = labelAT):
+def update(dt,GT=GT,label = labelReadingAT):
     global processedonce
     #label data updates
     label.delete()
-    label = pg.text.Label(text=str(GT + 1) + ' C',color=(0,0,0,255),font_size=36, bold=True, x = 123, y=893).draw()
+    label = pg.text.Label(text=str(GT + 1) + ' C',color=(0,0,0,255),font_size=36, bold=True, x = 123, y=893)
+    label.draw()
+    time.sleep(0.500)
     GT += 1
     #button logic for GT
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],60,833,1,1,255,136):
