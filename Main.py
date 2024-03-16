@@ -22,18 +22,21 @@ AT, IR, Wd, WS = pg.image.load('sensor_button.jpg'), pg.image.load('sensor_butto
 """
 (90, 34, 139);, 1 
 """
-label = pg.text.Label('Hello, world',
-                          font_name='Times New Roman',
-                          font_size=36,
-                          x=window.width//2, y=window.height//2,
-                          anchor_x='center', anchor_y='center',color=(90,34,139,1))
-labelGT = pg.text.Label(text="GT", color=(0,0,0,0),x=128,y=1035,font_size=36,bold=True,font_name='Times New Roman',anchor_x='center',anchor_y='center').draw()
-labelWB = pg.text.Label(text="WB", color=(0,0,0,0),x=351,y=1035,font_size=36,bold=True)
-labelAT = pg.text.Label(text="AT", color=(0,0,0,0),x=841,y=1035,font_size=36,bold=True)
-labelIR = pg.text.Label(text="IR", color=(0,0,0,0),x=1311,y=1035,font_size=36,bold=True)
-labelWD = pg.text.Label(text="Wd", color=(0,0,0,0),x=550,y=1035,font_size=36,bold=True)
-labelWS = pg.text.Label(text="WS", color=(0,0,0,0),x=1500,y=1035,font_size=36,bold=True)
-
+"""
+GT.blit(123,733)
+    WB.blit(351,733)
+    AT.blit(841,733)
+    IR.blit(1000,733)
+    Wd.blit(550,733)
+    WS.blit(1200,733)
+    """
+labelGT = pg.text.Label(text="GT", color=(0,0,0,255),x=123,y=1035,font_size=36,bold=True,font_name='Times New Roman')
+labelWB = pg.text.Label(text="WB", color=(0,0,0,255),x=351,y=1035,font_size=36,bold=True)
+labelAT = pg.text.Label(text="AT", color=(0,0,0,255),x=791,y=1035,font_size=36,bold=True)
+labelIR = pg.text.Label(text="IR", color=(0,0,0,255),x=1000,y=1035,font_size=36,bold=True)
+labelWD = pg.text.Label(text="Wd", color=(0,0,0,255),x=550,y=1035,font_size=36,bold=True)
+labelWS = pg.text.Label(text="WS", color=(0,0,0,255),x=1200,y=1035,font_size=36,bold=True)
+blank = pg.text.Label('')
 
 #returns window
 def getWindow():
@@ -53,47 +56,52 @@ processedonce = False
 def on_draw():
     window.clear()
     image.blit(0,0)
+    labelGT.draw()
     labelAT.draw()
-    GT.blit(123,733)
-    WB.blit(351,733)
-    AT.blit(841,733)
-    IR.blit(1000,733)
-    Wd.blit(550,733)
-    WS.blit(1200,733)
+    labelIR.draw()
+    labelWB.draw()
+    labelWD.draw()
+    labelWS.draw()
+    GT.blit(60,833)
+    WB.blit(288,833)
+    AT.blit(728,833)
+    IR.blit(937,833)
+    Wd.blit(487,833)
+    WS.blit(1137,833)
 def update(dt):
     global processedonce
     #button logic for GT
-    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],123,733,1,1,255,136):
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],60,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
             print("Works")
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
-    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],351,733,1,1,255,136):
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],288,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
             print("Works")
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
-    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],841,733,1,1,255,136):
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],728,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
             print("Works")
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
-    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],1000,733,1,1,255,136):
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],937,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
             print("Works")
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
-    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],550,733,1,1,255,136):
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],487,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
             print("Works")
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
-    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],1200,733,1,1,255,136):
+    if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],1137,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
             print("Works")
             processedonce = True
@@ -117,7 +125,11 @@ def on_key_press(symbol, modifiers = 0):
 def on_activate():
     # music = pg.media.load("C:\\Users\\aiden\\Downloads\\click.mp3")
     # music.play()
+    blank.draw()
     pass
+@window.event
+def on_show():
+    blank.draw()
 
 #runs code above
 pg.clock.schedule_interval(update,1/120)
