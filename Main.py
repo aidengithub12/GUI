@@ -9,8 +9,8 @@ import random
 import matplotlib.pyplot as plot
 
 MOUSE = MouseHandler.MouseStateHandler()
-resolution = [1920,1080]
-window = pg.window.Window(width=int(resolution[0]),height=int(resolution[1]))
+resolution = [1920,1080, 320, 640]
+window = pg.window.Window(width=int(resolution[0]),height=int(resolution[1]),resizable = True)
 image = pg.image.SolidColorImagePattern((255,255,255,255)).create_image(int(resolution[0]),int(resolution[1]))
 window.push_handlers(MOUSE)
 
@@ -128,8 +128,11 @@ def on_activate():
     blank.draw()
     pass
 @window.event
+def on_hide():
+    on_draw()
+@window.event
 def on_show():
-    blank.draw()
+    on_draw()
 
 #runs code above
 pg.clock.schedule_interval(update,1/120)
