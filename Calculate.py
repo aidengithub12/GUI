@@ -1,6 +1,9 @@
 import pysensors
-
+#wbgt
+#heat index
 def getSensorData():
     pass
-def calculateGoalValue():
+def CalcWBGT():
+    pass
+def CalcHeatIndex():
     pass

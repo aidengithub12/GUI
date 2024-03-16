@@ -1,22 +1,39 @@
 import pyglet as pg
+import os
 from pyglet.window import mouse
 import RectangleCollision
 import MouseHandler
 import pyglet.gui as pgg
+import pandas as pand
 import random
 # import glooey as golden
 import matplotlib.pyplot as plot
-
+#TODO: fix screen bug
 MOUSE = MouseHandler.MouseStateHandler()
-resolution = [1920,1080, 320, 640]
+resolution = [1920,1080]
 window = pg.window.Window(width=int(resolution[0]),height=int(resolution[1]),resizable = True)
 image = pg.image.SolidColorImagePattern((255,255,255,255)).create_image(int(resolution[0]),int(resolution[1]))
 window.push_handlers(MOUSE)
+samplestring = '80,90,104,120,28.2,70,10,270,90'
 
+#All reading variables
+GT = 0 #temp
+WB = 0 #temp
+AT = 0 #temp
+IR = 0 #temp
+BAR = 0 #float
+RH = 0 #float
+WD = 0 #int
+WS = 0 #int
+LAT = 0 #float
+LONG = 0 #float
+#map = 0
+#gps = 0
+compass = 0 #float
 #All button declarations
-GT = pg.image.load('sensor_button.jpg')
-WB = pg.image.load('sensor_button.jpg')
-AT, IR, Wd, WS = pg.image.load('sensor_button.jpg'), pg.image.load('sensor_button.jpg'), pg.image.load('sensor_button.jpg'), pg.image.load('sensor_button.jpg')
+GT_Image = pg.image.load('sensor_button.jpg')
+WB_Image = pg.image.load('sensor_button.jpg')
+AT_Image, IR_Image, Wd_Image, WS_Image = pg.image.load('sensor_button.jpg'), pg.image.load('sensor_button.jpg'), pg.image.load('sensor_button.jpg'), pg.image.load('sensor_button.jpg')
 #All labels for buttons here
 """
 (90, 34, 139);, 1 
@@ -36,7 +53,14 @@ labelIR = pg.text.Label(text="IR", color=(0,0,0,255),x=1000,y=1035,font_size=36,
 labelWD = pg.text.Label(text="Wd", color=(0,0,0,255),x=550,y=1035,font_size=36,bold=True)
 labelWS = pg.text.Label(text="WS", color=(0,0,0,255),x=1200,y=1035,font_size=36,bold=True)
 blank = pg.text.Label('')
-
+labelReadingGT = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 123, y = 833, font_size=36, bold = True)
+labelReadingWB = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 351, y = 833, font_size=36, bold = True)
+labelReadingAT = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 791, y = 833, font_size=36, bold = True)
+labelReadingIR = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 1000, y = 833, font_size=36, bold = True)
+labelReadingWD = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 550, y = 833, font_size=36, bold = True)
+labelReadingWS = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 1200, y = 833, font_size=36, bold = True)
+labelReadingLAT = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 123, y = 150, font_size=36, bold = True)
+labelReadingLONG = pg.text.Label(text=str(GT) + ' C', color = (0,0,0,255), x = 123, y = 150, font_size=36, bold = True)
 #returns window
 def getWindow():
     return window
@@ -61,12 +85,13 @@ def on_draw():
     labelWB.draw()
     labelWD.draw()
     labelWS.draw()
-    GT.blit(60,833)
-    WB.blit(288,833)
-    AT.blit(728,833)
-    IR.blit(937,833)
-    Wd.blit(487,833)
-    WS.blit(1137,833)
+    GT_Image.blit(60,833)
+    WB_Image.blit(288,833)
+    AT_Image.blit(728,833)
+    IR_Image.blit(937,833)
+    Wd_Image.blit(487,833)
+    WS_Image.blit(1137,833)
+    
 def update(dt):
     global processedonce
     #button logic for GT
