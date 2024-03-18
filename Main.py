@@ -116,7 +116,7 @@ def update(dt,GT=GT,label = labelReadingAT):
     #button logic for GT
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],60,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
-            print("Works")
+            getGraph([5,4,2],[9,3,2])
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False

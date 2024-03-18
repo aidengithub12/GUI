@@ -15,7 +15,7 @@ def getSensorData():
             lastCommaPosition = i + 1
     print(seperatedData)
     
-def CalcWBGT():
+def CalcWBGT(file):
     pass
 def CalcHeatIndex():
     pass
