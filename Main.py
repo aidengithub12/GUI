@@ -11,6 +11,7 @@ import csv
 import matplotlib.pyplot as plot
 import Calculate
 
+
 #TODO: fix screen bug
 MOUSE = MouseHandler.MouseStateHandler()
 resolution = [1920,1080]
@@ -49,6 +50,7 @@ GT.blit(123,733)
     Wd.blit(550,733)
     WS.blit(1200,733)
     """
+
 fps_display = pg.window.FPSDisplay(window=window)
 fps_display.label._set_position((window.height/2, window.width/2,0))
 labelGT = pg.text.Label(text="GT", color=(0,0,0,255),x=123,y=1035,font_size=36,bold=True,font_name='Times New Roman')
