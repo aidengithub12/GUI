@@ -10,6 +10,7 @@ import csv
 # import glooey as golden
 import matplotlib.pyplot as plot
 import Calculate
+
 #TODO: fix screen bug
 MOUSE = MouseHandler.MouseStateHandler()
 resolution = [1920,1080]
@@ -48,6 +49,8 @@ GT.blit(123,733)
     Wd.blit(550,733)
     WS.blit(1200,733)
     """
+fps_display = pg.window.FPSDisplay(window=window)
+fps_display.label._set_position((window.height/2, window.width/2,0))
 labelGT = pg.text.Label(text="GT", color=(0,0,0,255),x=123,y=1035,font_size=36,bold=True,font_name='Times New Roman')
 labelWB = pg.text.Label(text="WB", color=(0,0,0,255),x=351,y=1035,font_size=36,bold=True)
 labelAT = pg.text.Label(text="AT", color=(0,0,0,255),x=791,y=1035,font_size=36,bold=True)
@@ -105,15 +108,11 @@ def on_draw():
     labelReadingLONG.draw()
     labelReadingBAR.draw()
     labelReadingRH.draw()
-def update(dt,GT=GT,label = labelReadingAT):
+    fps_display.draw()
+def update(dt,label = labelReadingAT):
     global processedonce
-    #label data updates
-    label.delete()
-    label = pg.text.Label(text=str(GT + 1) + ' C',color=(0,0,0,255),font_size=36, bold=True, x = 123, y=893)
-    label.draw()
-    time.sleep(0.500)
-    GT += 1
-    #button logic for GT
+    global GT
+    label.text = str(AT) + "Units"
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],60,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
             getGraph([5,4,2],[9,3,2])
