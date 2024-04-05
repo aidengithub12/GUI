@@ -2,11 +2,8 @@ import pyglet as pg
 from pyglet.window import mouse
 import RectangleCollision
 import MouseHandler
-import time
 import pyglet.gui as pgg
-import pandas as pand
 import random
-import csv
 # import glooey as golden
 import matplotlib.pyplot as plot
 import Calculate
@@ -113,8 +110,20 @@ def on_draw():
     fps_display.draw()
 def update(dt,label = labelReadingAT):
     global processedonce
-    global GT
-    label.text = str(AT) + "Units"
+    data = Calculate.getSensorData()
+    """
+    data.GT,data.WB,data.AT,data.IRT,data.P,data.RH,data.WS,data.WD,data.LAT,
+    data.LON,data.COMP
+    """
+    labelReadingGT.text = str(data[2])
+    labelReadingWB.text = str(data[3])
+    labelReadingAT.text = str(data[4])
+    labelReadingIR.text = str(data[5])
+    labelReadingRH.text = str(data[7])
+    labelReadingWS.text = str(data[8])
+    labelReadingWD.text = str(data[9])
+    labelReadingLAT.text = str(data[10])
+    labelReadingLONG.text = str(data[11])
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],60,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
             getGraph([5,4,2],[9,3,2])
@@ -177,7 +186,6 @@ def on_hide():
 @window.event
 def on_show():
     on_draw()
-Calculate.getSensorData()
 #runs code above
 pg.clock.schedule_interval(update,1/120)
 pg.app.run()
