@@ -113,7 +113,7 @@ def update(dt,label = labelReadingAT):
     
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],60,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
-            getGraph([5,4,2],[9,3,2])
+            getGraph()
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
@@ -148,8 +148,9 @@ def update(dt,label = labelReadingAT):
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
 #opens graph window
-def getGraph(x=[1,2,3],y=[2,4,1]):
-    plot.plot(x,y)
+def getGraph():
+    data = Calculate.getSensorData()
+    plot.plot(sorted(data[1]),data[2])
     plot.xlabel('Xaxis')
     plot.ylabel('Yaxis')
     plot.table('sensor data')
@@ -174,20 +175,21 @@ def on_hide():
 def on_show():
     on_draw()
 def updateValues(dt):
+    global data
     data = Calculate.getSensorData()
     """
     data.GT,data.WB,data.AT,data.IRT,data.P,data.RH,data.WS,data.WD,data.LAT,
     data.LON,data.COMP
     """
-    labelReadingGT.text = str(data[2][0])
-    labelReadingWB.text = str(data[3][0])
-    labelReadingAT.text = str(data[4][0])
-    labelReadingIR.text = str(data[5][0])
-    labelReadingRH.text = str(data[7][0])
-    labelReadingWS.text = str(data[8][0])
-    labelReadingWD.text = str(data[9][0])
-    labelReadingLAT.text = str(data[10][0])
-    labelReadingLONG.text = str(data[11][0])
+    labelReadingGT.text = str(data[2][0]) + 'C'
+    labelReadingWB.text = str(data[3][0]) + 'C'
+    labelReadingAT.text = str(data[4][0]) + 'C'
+    labelReadingIR.text = str(data[5][0]) + 'units'
+    labelReadingRH.text = str(data[7][0]) + 'units'
+    labelReadingWS.text = str(data[8][0]) + 'm/s'
+    labelReadingWD.text = str(data[9][0]) + 'units'
+    labelReadingLAT.text = str(data[10][0]) + 'degrees'
+    labelReadingLONG.text = str(data[11][0]) + 'degrees'
 #runs code above
 pg.clock.schedule_interval(update,1/120)
 pg.clock.schedule_interval(updateValues,1/10)
