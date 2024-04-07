@@ -110,40 +110,40 @@ def on_draw():
     fps_display.draw()
 def update(dt):
     global processedonce
-    
+    data = Calculate.getSensorData()
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],60,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
-            MasterFIle.getGraph()
+            MasterFIle.getGraph(xvalues=data[1],yvalues=data[2],var="GT")
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],288,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
-            print("Works")
+            MasterFIle.getGraph(xvalues=data[1],yvalues=data[2],var="WB")
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],728,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
-            print("Works")
+            MasterFIle.getGraph(xvalues=data[1],yvalues=data[2],var="AT")
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],937,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
-            print("Works")
+            MasterFIle.getGraph(xvalues=data[1],yvalues=data[2],var="IR")
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],487,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
-            print("Works")
+            MasterFIle.getGraph(xvalues=data[1],yvalues=data[2],var="WD")
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],1137,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
-            print("Works")
+            MasterFIle.getGraph(xvalues=data[1],yvalues=data[2],var="WS")
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
