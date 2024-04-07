@@ -5,7 +5,7 @@ import MouseHandler
 import pyglet.gui as pgg
 import random
 # import glooey as golden
-import matplotlib.pyplot as plot
+import MasterFIle
 import Calculate
 
 
@@ -108,12 +108,12 @@ def on_draw():
     labelReadingBAR.draw()
     labelReadingRH.draw()
     fps_display.draw()
-def update(dt,label = labelReadingAT):
+def update(dt):
     global processedonce
     
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],60,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
-            getGraph()
+            MasterFIle.getGraph()
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
@@ -147,20 +147,6 @@ def update(dt,label = labelReadingAT):
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
-#opens graph window
-def getGraph():
-    data = Calculate.getSensorData()
-    plot.plot(sorted(data[1]),data[2])
-    plot.xlabel('Xaxis')
-    plot.ylabel('Yaxis')
-    plot.table('sensor data')
-    plot.show()
-#gets graph everytime 'c' is pressed
-@window.event
-def on_key_press(symbol, modifiers = 0):
-    if symbol == pg.window.key.G:
-        getGraph()
-    
 #makes click sound everytime a window is opened
 @window.event
 def on_activate():
@@ -181,16 +167,16 @@ def updateValues(dt):
     data.GT,data.WB,data.AT,data.IRT,data.P,data.RH,data.WS,data.WD,data.LAT,
     data.LON,data.COMP
     """
-    labelReadingGT.text = str(data[2][0]) + 'C'
-    labelReadingWB.text = str(data[3][0]) + 'C'
-    labelReadingAT.text = str(data[4][0]) + 'C'
-    labelReadingIR.text = str(data[5][0]) + 'units'
-    labelReadingRH.text = str(data[7][0]) + 'units'
-    labelReadingWS.text = str(data[8][0]) + 'm/s'
-    labelReadingWD.text = str(data[9][0]) + 'units'
-    labelReadingLAT.text = str(data[10][0]) + 'degrees'
-    labelReadingLONG.text = str(data[11][0]) + 'degrees'
+    labelReadingGT.text = str(data[2][len(data[2]) - 1]) + 'C'
+    labelReadingWB.text = str(data[3][0]) #+ 'C'
+    labelReadingAT.text = str(data[4][0]) #+ 'C'
+    labelReadingIR.text = str(data[5][0]) #+ 'units'
+    labelReadingRH.text = str(data[7][0]) #+ 'units'
+    labelReadingWS.text = str(data[8][0]) #+ 'm/s'
+    labelReadingWD.text = str(data[9][0]) #+ 'units'
+    labelReadingLAT.text = str(data[10][0]) #+ 'degrees'
+    labelReadingLONG.text = str(data[11][0]) #+ 'degrees'
 #runs code above
-pg.clock.schedule_interval(update,1/120)
+pg.clock.schedule_interval(update,1/10)
 pg.clock.schedule_interval(updateValues,1/10)
 pg.app.run()
