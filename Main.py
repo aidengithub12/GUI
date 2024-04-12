@@ -34,7 +34,7 @@ compass = 0 #float
 #All button declarations
 GT_Image = pg.image.load('sensor_button.jpg')
 WB_Image = pg.image.load('sensor_button.jpg')
-AT_Image, IR_Image, Wd_Image, WS_Image = pg.image.load('sensor_button.jpg'), pg.image.load('sensor_button.jpg'), pg.image.load('sensor_button.jpg'), pg.image.load('sensor_button.jpg')
+AT_Image, IR_Image, Wd_Image, WS_Image,LAT_Image,LONG_Image,BAR_Image, RH_Image = pg.image.load('sensor_button.jpg'), pg.image.load('sensor_button.jpg'), pg.image.load('sensor_button.jpg'), pg.image.load('sensor_button.jpg'),pg.image.load('sensor_button.jpg'),pg.image.load('sensor_button.jpg'),pg.image.load('sensor_button.jpg'),pg.image.load('sensor_button.jpg')
 #All labels for buttons here
 """
 (90, 34, 139);, 1 
@@ -83,6 +83,8 @@ def setBackground():
 processedonce = False
 @window.event
 def on_draw():
+    draw_everything(None)
+def draw_everything(dt):
     window.clear()
     image.blit(0,0)
     labelGT.draw()
@@ -97,6 +99,11 @@ def on_draw():
     IR_Image.blit(937,833)
     Wd_Image.blit(487,833)
     WS_Image.blit(1137,833)
+    LAT_Image.blit(39,405)
+    LONG_Image.blit(39,263)
+    RH_Image.blit(1040,263)
+    BAR_Image.blit(1040,405)
+
     labelReadingGT.draw()
     labelReadingAT.draw()
     labelReadingIR.draw()
@@ -108,12 +115,14 @@ def on_draw():
     labelReadingBAR.draw()
     labelReadingRH.draw()
     fps_display.draw()
+
+
 def update(dt):
     global processedonce
     data = Calculate.getSensorData()
     if RectangleCollision.collision.rectangle(MOUSE["x"],MOUSE["y"],60,833,1,1,255,136):
         if MOUSE[mouse.LEFT] and processedonce == False:
-            MasterFIle.getGraph(xvalues=data[1],yvalues=data[2],var="GT")
+            MasterFIle.getGraph(xvalues=data[1],yvalues=MasterFIle.sortTimes(data[2]),var="GT")
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
@@ -147,7 +156,23 @@ def update(dt):
             processedonce = True
         if not MOUSE[mouse.LEFT] and processedonce == True:
             processedonce = False
-#makes click sound everytime a window is opened
+    if RectangleCollision.collision.rectangle(MOUSE['x'],MOUSE['y'],39,405,1,1,255,136):
+        if MOUSE[mouse.LEFT] and processedonce == False:
+            MasterFIle.getGraph(xvalues=data[10],yvalues=MasterFIle.sortTimes(data[2]),var="LAT")
+        if not MOUSE[mouse.LEFT] and processedonce == True:
+            processedonce = False
+    if RectangleCollision.collision.rectangle(MOUSE['x'],MOUSE['y'],39,263,1,1,255,136):
+        if MOUSE[mouse.LEFT] and processedonce == False:
+            MasterFIle.getGraph(xvalues=data[11],yvalues=data[2],var="LONG")
+            processedonce = True
+        if not MOUSE[mouse.LEFT] and processedonce == True:
+            processedonce = False
+    if RectangleCollision.collision.rectangle(MOUSE['x'], MOUSE['y'],1040,263,1,1,255,136):
+        if MOUSE[mouse.LEFT] and processedonce == False:
+            MasterFIle.getGraph(xvalues=data[7],yvalues=data[2],var="RH")
+            processedonce = False
+        if not MOUSE[mouse.LEFT] and processedonce == True:
+            processedonce = False
 @window.event
 def on_activate():
     # music = pg.media.load("C:\\Users\\aiden\\Downloads\\click.mp3")
@@ -168,15 +193,16 @@ def updateValues(dt):
     data.LON,data.COMP
     """
     labelReadingGT.text = str(data[2][len(data[2]) - 1]) + 'C'
-    labelReadingWB.text = str(data[3][0]) #+ 'C'
-    labelReadingAT.text = str(data[4][0]) #+ 'C'
+    labelReadingWB.text = str(data[3][0]) + 'C'
+    labelReadingAT.text = str(data[4][0]) + 'C'
     labelReadingIR.text = str(data[5][0]) #+ 'units'
     labelReadingRH.text = str(data[7][0]) #+ 'units'
-    labelReadingWS.text = str(data[8][0]) #+ 'm/s'
+    labelReadingWS.text = str(data[8][0]) + 'm/s'
     labelReadingWD.text = str(data[9][0]) #+ 'units'
     labelReadingLAT.text = str(data[10][0]) #+ 'degrees'
     labelReadingLONG.text = str(data[11][0]) #+ 'degrees'
 #runs code above
-pg.clock.schedule_interval(update,1/10)
-pg.clock.schedule_interval(updateValues,1/10)
+pg.clock.schedule_interval(update,1/60)
+pg.clock.schedule_interval(updateValues,10)
+pg.clock.schedule_interval(draw_everything, 10)
 pg.app.run()
