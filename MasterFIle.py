@@ -1,4 +1,3 @@
-import datetime
 import pandas as pd
 import matplotlib.pyplot as plot
 def getGraph(xvalues, yvalues, var = "GT"):
