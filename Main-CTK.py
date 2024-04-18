@@ -64,6 +64,10 @@ LATbutton.place(relx = 0.572916667, rely = 0.2421875)
 LONGbutton.place(relx = 0.572916667, rely = 0.1682291667)
 COMPbutton.place(relx=0.5,rely=0.5,anchor=tk.CENTER) #need to find place for
 
+def key_press():
+    Calculate.changeCSV()
+    print("Ran this code")
 
 #main loop
+window.bind('<Return>', key_press())
 window.mainloop()
