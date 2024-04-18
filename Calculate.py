@@ -4,7 +4,7 @@
 import pandas as pd
 import matplotlib as mp
 def getSensorData():
-    data = pd.read_csv("Variable_File.csv")
+    data = pd.read_csv("C:\\Users\\aiden\\OneDrive\\Documents\\Github\\python-sensor-gui\\Grandpa Project\\Variable_File.csv")
     vars = [data.DATE,data.TIME,data.GT,data.WB,data.AT,data.IRT,data.P,data.RH,data.WS,data.WD,data.LAT,
     data.LON,data.COMP]
     with open("LOGFILE_VARS","w") as f:
