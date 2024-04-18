@@ -5,7 +5,7 @@ import Calculate
 
 
 
-ctk.set_appearance_mode("light")
+ctk.set_appearance_mode("dark")
 #window creation
 window = ctk.CTk()
 #set resolution
@@ -60,8 +60,8 @@ Pbutton.place(relx = 0.2864593 ,rely = 0.82685)
 RHbutton.place(relx = 0.625 ,rely = 0.82685)
 WSbutton.place(relx = 0.0515625, rely = 0.2421875)
 WDbutton.place(relx = 0.0515625, rely = 0.1682291667)
-LATbutton.place(relx = 0.572916667, rely = 0.2421875)
-LONGbutton.place(relx = 0.572916667, rely = 0.1682291667)
+LATbutton.place(relx = 0.872916667, rely = 0.2421875)
+LONGbutton.place(relx = 0.872916667, rely = 0.1682291667)
 COMPbutton.place(relx=0.5,rely=0.5,anchor=tk.CENTER) #need to find place for
 
 def key_press():
