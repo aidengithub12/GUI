@@ -16,16 +16,16 @@ window.geometry('1920x1080')
 # testbutton.place(relx = 0.5,rely=0.6,anchor=tk.CENTER)
 
 #All reading variables
-GT = 0 #temp
-WB = 0 #temp
-AT = 0 #temp
-IR = 0 #temp
-BAR = 0 #float
-RH = 0 #float
-WD = 0 #int
-WS = 0 #int
-LAT = 0 #float
-LONG = 0 #float
+# GT = 0 #temp
+# WB = 0 #temp
+# AT = 0 #temp
+# IR = 0 #temp
+# BAR = 0 #float
+# RH = 0 #float
+# WD = 0 #int
+# WS = 0 #int
+# LAT = 0 #float
+# LONG = 0 #float
 """
 x = 123, y = 893 #done
 x = 351, y = 893 #done
@@ -50,7 +50,7 @@ WDbutton = ctk.CTkButton(window, text="WD", command=lambda: MasterFIle.getGraph(
 LATbutton = ctk.CTkButton(window, text="LAT", command=lambda: MasterFIle.getGraph(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[10],var="LAT"))
 LONGbutton = ctk.CTkButton(window, text="LONG", command=lambda: MasterFIle.getGraph(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[11],var="LONG"))
 COMPbutton = ctk.CTkButton(window, text="COMP", command=lambda: MasterFIle.getGraph(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[12],var="COMP"))
-
+TestButton = ctk.CTkButton(window, text="test", command= lambda: MasterFIle.printNew())
 #place buttons
 GTbutton.place(relx=0.064,rely=0.82685)
 WBbutton.place(relx = 0.1828125 , rely = 0.82685)
@@ -63,7 +63,8 @@ WDbutton.place(relx = 0.0515625, rely = 0.1682291667)
 LATbutton.place(relx = 0.872916667, rely = 0.2421875)
 LONGbutton.place(relx = 0.872916667, rely = 0.1682291667)
 COMPbutton.place(relx=0.5,rely=0.5,anchor=tk.CENTER) #need to find place for
-
+TestButton.place(relx = 0.5, rely = 0.5)
+# MasterFIle.getLiveGraph(Calculate.getSensorData()[1],Calculate.getSensorData()[2],window)
 def key_press():
     Calculate.changeCSV()
     print("Ran this code")

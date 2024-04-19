@@ -11,6 +11,7 @@ def getSensorData():
     with open("LOGFILE_VARS","w") as f:
         for i in range(0,len(vars)):
             f.write(str(vars[i]) + "\n")
+    print("Ran this code")
     return vars
 def changeCSV():
     csv = str("C:\\Users\\aiden\\OneDrive\\Documents\\Github\\python-sensor-gui\\Grandpa Project\\TestCSV.csv")
