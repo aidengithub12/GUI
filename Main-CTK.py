@@ -70,4 +70,5 @@ def key_press():
 
 #main loop
 window.bind('<Return>', key_press())
+window.update()
 window.mainloop()

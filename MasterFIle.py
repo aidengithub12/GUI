@@ -1,5 +1,13 @@
 import pandas as pd
+import matplotlib
+matplotlib.use("TkAgg")
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
 import matplotlib.pyplot as plot
+import matplotlib.animation as an
+from matplotlib import style as st
+
+
 def getGraph(xvalues, yvalues, var = "GT"):
     plot.plot(sorted(xvalues),yvalues)
     plot.xlabel('Time')
@@ -11,3 +19,6 @@ def sortTimes(times):
     # create dataframe
     df = pd.DataFrame({'name': times, 'count': len(times)}).sort_values('count', ascending=False)
     return times
+def getLiveGraph():
+    st.use("ggplot")
+    
