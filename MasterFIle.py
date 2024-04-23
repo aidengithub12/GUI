@@ -4,7 +4,7 @@ import matplotlib.animation as an
 from matplotlib import style as st
 import tkinter as tk
 import customtkinter as ctk
-import Main-CTK
+import Main_CTK
 i = int(0)
 def getGraph(xvalues, yvalues, var = "GT"):
     plot.plot(xvalues,yvalues)
@@ -45,7 +45,7 @@ class page2():
     def __init__(self):
         window = self
     # MasterFIle.getLiveGraphTest1(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[2],self=window)
-    Page1Button = ctk.CTkButton(window,text="Page 1", command=toPage(page1()))
+    Page1Button = ctk.CTkButton(window,text="Page 1", command=toPage(Main_CTK.page1()))
     window.mainloop()
 def printNew():
     global i
