@@ -5,7 +5,7 @@ from matplotlib import style as st
 import tkinter as tk
 i = int(0)
 def getGraph(xvalues, yvalues, var = "GT"):
-    plot.plot(sorted(xvalues),yvalues)
+    plot.plot(xvalues,yvalues)
     plot.xlabel('Time')
     plot.ylabel(str(var))
     plot.title(str(var) + " Vs. Time")
