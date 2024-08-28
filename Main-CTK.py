@@ -39,6 +39,7 @@ x = 1100, y = 465
 x = 1100, y = 323
 """
 # #buttons
+
 GTbutton = ctk.CTkButton(window,text="GT",command=lambda: MasterFIle.getGraph(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[2]))
 WBbutton = ctk.CTkButton(window, text="WB", command=lambda: MasterFIle.getGraph(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[3],var="WB"))
 ATbutton = ctk.CTkButton(window, text="AT", command=lambda: MasterFIle.getGraph(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[4],var="AT"))
@@ -50,6 +51,7 @@ WDbutton = ctk.CTkButton(window, text="WD", command=lambda: MasterFIle.getGraph(
 LATbutton = ctk.CTkButton(window, text="LAT", command=lambda: MasterFIle.getGraph(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[10],var="LAT"))
 LONGbutton = ctk.CTkButton(window, text="LONG", command=lambda: MasterFIle.getGraph(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[11],var="LONG"))
 COMPbutton = ctk.CTkButton(window, text="COMP", command=lambda: MasterFIle.getGraph(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[12],var="COMP"))
+TestButton = ctk.CTkButton(window,text="TEST", command=lambda: Calculate.changeCSV())
 #place buttons
 GTbutton.place(relx=0.064,rely=0.82685)
 WBbutton.place(relx = 0.1828125 , rely = 0.82685)
@@ -61,13 +63,11 @@ WSbutton.place(relx = 0.0515625, rely = 0.2421875)
 WDbutton.place(relx = 0.0515625, rely = 0.1682291667)
 LATbutton.place(relx = 0.872916667, rely = 0.2421875)
 LONGbutton.place(relx = 0.872916667, rely = 0.1682291667)
+TestButton.place(relx= 0.2,rely= 0.2)
 COMPbutton.place(relx=0.5,rely=0.5,anchor=tk.CENTER) #need to find place for
 # MasterFIle.getLiveGraph(Calculate.getSensorData()[1],Calculate.getSensorData()[2],window)
-def key_press():
-    Calculate.changeCSV()
-    print("Ran this code")
+
 
 #main loop
-window.bind('<Return>', key_press())
 window.update()
 window.mainloop()
