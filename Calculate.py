@@ -4,6 +4,7 @@
 import pandas as pd
 import matplotlib as mp
 csv = str("C:\\Users\\aiden\\Documents\\GitHub\\GUI\\Variable_File.csv")#path for csv changes based off of computer
+isnew = False
 def getSensorData():
     data = pd.read_csv(csv)
     vars = [data.DATE,data.TIME,data.GT,data.WB,data.AT,data.IRT,data.P,data.RH,data.WS,data.WD,data.LAT,
@@ -15,8 +16,14 @@ def getSensorData():
     return vars
 def changeCSV(): #function to grab and change csv file - can be done externally though for extra performance
     global csv
-    csv = str("C:\\Users\\aiden\\Documents\\GitHub\\GUI\\TestCSV.csv")
-    print("CSV CHANGED")
+    global isnew
+    if (isnew):
+        csv = str("C:\\Users\\aiden\\Documents\\GitHub\\GUI\\TestCSV.csv")
+        print("CSV CHANGED")
+    else:
+        pass
+    isnew = not isnew
+
 def CalcWBGT(vars):
     return (0.7 * vars[3][0]) + (0.2 * vars[2][0]) + (0.1 * vars[4][0])
 def CalcHeatIndex():
