@@ -51,7 +51,7 @@ WDbutton = ctk.CTkButton(window, text="WD", command=lambda: MasterFIle.getGraph(
 LATbutton = ctk.CTkButton(window, text="LAT", command=lambda: MasterFIle.getGraph(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[10],var="LAT"))
 LONGbutton = ctk.CTkButton(window, text="LONG", command=lambda: MasterFIle.getGraph(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[11],var="LONG"))
 COMPbutton = ctk.CTkButton(window, text="COMP", command=lambda: MasterFIle.getGraph(xvalues=Calculate.getSensorData()[1],yvalues=Calculate.getSensorData()[12],var="COMP"))
-# TestButton = ctk.CTkButton(window,text="TEST", command=lambda: Calculate.changeCSV())
+RefreshButton = ctk.CTkButton(window,text="Refresh CSV", command=lambda: MasterFIle.getNewData())
 #place buttons
 GTbutton.place(relx=0.064,rely=0.82685)
 WBbutton.place(relx = 0.1828125 , rely = 0.82685)
@@ -63,11 +63,12 @@ WSbutton.place(relx = 0.0515625, rely = 0.2421875)
 WDbutton.place(relx = 0.0515625, rely = 0.1682291667)
 LATbutton.place(relx = 0.872916667, rely = 0.2421875)
 LONGbutton.place(relx = 0.872916667, rely = 0.1682291667)
+RefreshButton.place(relx = 0.65, rely = 0.65)
 
 COMPbutton.place(relx=0.5,rely=0.5,anchor=tk.CENTER) #need to find place for
 # MasterFIle.getLiveGraph(Calculate.getSensorData()[1],Calculate.getSensorData()[2],window)
 
-Calculate.changeCSV() #checks for and changes csv
+
 #main loop
 window.update()
 window.mainloop()

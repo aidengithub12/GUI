@@ -3,6 +3,7 @@ import matplotlib.pyplot as plot
 import matplotlib.animation as an
 from matplotlib import style as st
 import tkinter as tk
+import Calculate
 i = int(0)
 def getGraph(xvalues, yvalues, var = "GT"):
     plot.plot(xvalues,yvalues)
@@ -38,3 +39,8 @@ def printNew():
     global i
     i += 1
     print(i)
+def getNewData():
+    if (Calculate.csv == Calculate.MAINCSV):
+        Calculate.csv = Calculate.TESTCSV
+    else:
+        Calculate.csv = Calculate.MAINCSV
