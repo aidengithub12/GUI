@@ -4,7 +4,8 @@ import matplotlib.animation as an
 from matplotlib import style as st
 import tkinter as tk
 import Calculate
-i = int(0)
+# i = int(0)
+CSVhasChanged = False
 def getGraph(xvalues, yvalues, var = "GT"):
     plot.plot(xvalues,yvalues)
     plot.xlabel('Time')
@@ -40,6 +41,7 @@ def printNew():
     i += 1
     print(i)
 def getNewData():
+    CSVhasChanged = True
     if (Calculate.csv == Calculate.MAINCSV):
         Calculate.csv = Calculate.TESTCSV
     else:
